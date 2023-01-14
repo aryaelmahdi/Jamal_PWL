@@ -12,14 +12,20 @@ if (isset($_POST['submit'])){
     $password = stripslashes($_POST['password']);
     $password = mysqli_real_escape_string($con, $password);
     if (!empty(trim($username)) && !empty(trim($password))){
-        $query = "SELECT * FROM user WHERE username = '$username'";
+        $query = "SELECT * FROM users WHERE username = '$username'";
         $result = mysqli_query($con,$query);
         $rows = mysqli_num_rows($result);
+        $data = mysqli_fetch_assoc($result);
         if ($rows != 0){
-            $hash = mysqli_fetch_assoc($result)['password'];
+            $hash = $data['password'];
             if (password_verify($password, $hash) && $_SESSION['code'] == $_POST['kodecaptcha']){
-                $_SESSION['username'] = $username;
-                header('Location: home.php');
+                if($data['level'] == 'admin'){
+                    $_SESSION['username'] = $username;
+                    header('Location: dashboard.php');
+                }else if($data['level'] == 'user'){
+                    $_SESSION['username'] = $username;
+                    header('Location: home.php');
+                }
             }
         } else{
             $error = 'Username atau Password Salah!';
@@ -44,7 +50,7 @@ if (isset($_POST['submit'])){
 
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
-    <form action="loginuser.php" method="POST">
+    <form action="login.php" method="POST">
         <img class="mb-4" src="images/android-chrome-192x192.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Login</h1>
 
@@ -67,7 +73,6 @@ if (isset($_POST['submit'])){
 
         <button class="w-100 btn btn-lg btn-primary" name="submit" type="submit">Sign in</button>
         <p>Belum Punya Akun? <a href="register.php">Register</a></p>
-        <p>Anda Admin? <a href="loginadmin.php">Login Admin</a></p>
         <p class="mt-5 mb-3 text-muted">&copy; 2022 JAMALGAMING</p>
     </form>
 </main>

@@ -29,12 +29,13 @@ if(isset($_POST['submit'])){
     $password = mysqli_real_escape_string($con, $password);
     $repass = stripslashes($_POST['repassword']);
     $repass = mysqli_real_escape_string($con, $repass);
+    $level = 'user';
 
     if (!empty(trim($username)) && !empty(trim($email)) && !empty(trim($password)) && !empty(trim($repass))){
         if ($password == $repass){
             if (cek_email($email,$con) == 0){
                 $pass = password_hash($password, PASSWORD_DEFAULT);
-                $query = "INSERT INTO user (email,username,password) VALUES ('$email','$username','$pass')";
+                $query = "INSERT INTO users (email,username,password,level) VALUES ('$email','$username','$pass','$level')";
                 $result = mysqli_query($con, $query);
                 if ($result){
                     $_SESSION['username'] = $username;
@@ -54,7 +55,7 @@ if(isset($_POST['submit'])){
 }
 function cek_email($email,$con){
     $email = mysqli_real_escape_string($con,$email);
-    $query = "SELECT * FROM user WHERE email = '$email'";
+    $query = "SELECT * FROM users WHERE email = '$email'";
     if ($result = mysqli_query($con,$query)) return mysqli_num_rows($result);
 }
 ?>
