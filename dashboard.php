@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['username'])){
     $_SESSION['msg'] = 'anda harus login';
-    header('Location: login.php');
+    header('Location: loginadmin.php');
 }
 ?>
 <!doctype html>
@@ -16,9 +16,9 @@ if (!isset($_SESSION['username'])){
     <title>Carousel Template · Bootstrap v5.3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
     <link href="css/carousel.css" rel="stylesheet">
     <link href="css/carousel.rtl.css" rel="stylesheet">
+    <link rel="icon" type="image" sizes="32x32" href="images/favicon-32x32.png"/>
 </head>
 <body>
 
@@ -26,7 +26,6 @@ if (!isset($_SESSION['username'])){
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="logout2.php">Logout</a>
-            </div>
         </div>
     </nav>
 </header>
@@ -39,15 +38,13 @@ if (!isset($_SESSION['username'])){
         <div class="row">
             <div class="col-lg-6">
                 <img src="images/history.png" width="140" height="140">
-                <h2 class="fw-normal">VALORANT</h2>
-                <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-                <p><a class="btn btn-secondary" href="#">TOP-UP </a></p>
+                <h2 class="fw-normal">HISTORY</h2>
+                <p><a class="btn btn-secondary" href="history.php">CHECK</a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-6">
-                <img src="images/GenshinImpact.jpg" width="140" height="140">
-                <h2 class="fw-normal">GENSHIN IMPACT</h2>
-                <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-                <p><a class="btn btn-secondary" href="#">TOP-UP </a></p>
+                <img src="images/chart2.png" width="140" height="140">
+                <h2 class="fw-normal">CHART</h2>
+                <p><a class="btn btn-secondary" href="chart.php">CHECK</a></p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
         <hr class="featurette-divider">
