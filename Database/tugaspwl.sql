@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2023 at 08:18 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Jan 14, 2023 at 10:56 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,22 +44,28 @@ INSERT INTO `admin` (`id`, `email`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `user` (
-  `id` int(10) NOT NULL,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `level` char(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`id`, `email`, `username`, `password`) VALUES
-(1, 'riyanatsil@gmail.com', 'riyan', '$2y$10$pCCzLsx8S8J0O/F0zXrN4.51HB8QwnqA5AnqdOopzLjCDDoXCEhFy');
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `level`) VALUES
+(1, 'riyan@gmail.com', 'admin', '$2y$10$k5VARuQjiJJxw1yl8/qjn.zAkc8nnsgN1ZlXoJxdpfA3j63BbrYCi', 'admin'),
+(2, 'riyanatsill@gmail.com', 'riyan', '$2y$10$bH1hVy38/rpKr3HV.nYGheyE.sSZ/t3JiTrt9dvY2UQbnkx/KRYYy', 'admin'),
+(3, 'adminnnnn@gmail.com', 'admin', '$2y$10$royyUFPfVfPIQAY/.Ew2UeayI01/PB11GnAsWeKx6dNK9R2MKVev.', 'admin'),
+(4, 'ziashafira@gmail.com', 'zia', '$2y$10$pzsJoKD2BmPxRr8rTsdqwu9r4ewyAP6zIwYZ5bwyx32VX6rOm7yby', 'admin'),
+(5, 'cobajaya@gmail.com', 'coba', '$2y$10$kpm4GNGcH728Vwi1.Fh6Y.I6h7Qe0EQvDB6xIEV37ipQSCvypiAh6', 'user'),
+(6, 'praba.arya.elmahdi.tik21@mhsw.pnj.ac.id', 'el', '$2y$10$SggY5aOOl7f7JGjHNGVawOTX01P30qYzHucFu.UFXujFj6QMM5Gg2', 'user');
 
 --
 -- Indexes for dumped tables
@@ -72,9 +78,9 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -88,10 +94,10 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
