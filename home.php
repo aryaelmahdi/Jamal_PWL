@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['username'])){
     $_SESSION['msg'] = 'anda harus login';
-    header('Location: loginuser.php');
+    header('Location: login.php');
 }
 ?>
 <!doctype html>

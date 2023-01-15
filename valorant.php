@@ -1,4 +1,25 @@
 <?php
+    require "config.php";
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        $uname = $_POST['nama'];
+        $uid = $_POST['uid'];
+        $item = $_POST['Product'];
+        $payment = $_POST['pay'];
+        $jumlah = '1';
+
+        $sql = "INSERT INTO transaksi SET 
+                username = '$uname',
+                uid = '$uid',
+                item = '$item',
+                payment = '$payment',
+                jumlah = '$jumlah'";
+        $query = mysqli_query($con, $sql);
+
+        if ($query) header("location:success.php");
+
+        echo "Something Went Wrong On The Create";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +59,7 @@
         <p>Unduh dan mainkan VALORANT sekarang!</p>
     </div>
 </div>
-<form method="POST" action="valorant">
+<form method="POST" action="valorant.php">
     <div id="data1" class="row">
         <div class="col-12 background-data">
             <h1>Masukan Data Anda</h1>
