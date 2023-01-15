@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['username'])){
     $_SESSION['msg'] = 'anda harus login';
-    header('Location: loginadmin.php');
+    header('Location: login.php');
 }
 ?>
 <!doctype html>
@@ -31,7 +31,7 @@ if (!isset($_SESSION['username'])){
 </header>
 
 <main>
-
+    <br/>
     <div class="container marketing">
 
         <!-- Three columns of text below the carousel -->

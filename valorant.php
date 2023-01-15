@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['username'])){
+        $_SESSION['msg'] = 'anda harus login';
+        header('Location: login.php');
+    }
     require "config.php";
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {

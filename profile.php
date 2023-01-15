@@ -1,4 +1,61 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['username'])){
+        $_SESSION['msg'] = 'anda harus login';
+        header('Location: login.php');
+    }
+
+    require "config.php";
+    // $uname = $_SESSION['username'];
+    // $sql = "SELECT * FROM users WHERE username = '$uname'";
+    // $query = mysqli_query($con, $sql);
+    // $data = mysqli_fetch_assoc($query);
+    // if(isset($_POST['submit'])){
+    //     if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    //         $email = $_POST['email'];
+    //         $username = $_POST['name'];
+    //         $password = $_POST['password'];
+    //         $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+    //         $id = $data['id'];
+
+    //         $sql = "UPDATE elmahdi SET 
+    //                 email = '$email',
+    //                 username = '$username',
+    //                 password = '$hashedPass'
+    //                 WHERE id = '$id'";
+    //         $query = mysqli_query($con, $sql);
+    
+    //         if ($query) header("location:home.php");
+    
+    //         echo "Something Went Wrong On The Update";
+    //     }
+    // }
+
+ 
+    
+    $uname = $_SESSION['username'];
+    $sql = "SELECT * FROM users WHERE username = '$uname'";
+    $query = mysqli_query($con, $sql);
+    $data = mysqli_fetch_assoc($query);
+    $id = $data['id'];
+    
+    if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
+        extract($_REQUEST);
+        $data	=	array(
+                        'email'=>$email,
+                        'username'=>$username,
+                        'password'=>$password,
+                        );
+        $update	=	$db->update('users',$data,array('id'=>$id));
+        if($update){
+            header('location: browse-users.php?msg=rus');
+            exit;
+        }else{
+            header('location: browse-users.php?msg=rnu');
+            exit;
+        }
+    }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +82,12 @@
                 <h1>Data Anda</h1>
                 <div class="col-12">
                     <h3>E-mail</h3>
-                    <input type="text" name="email" class="input-submit" id="floatingInput" placeholder="E-mail">
+                    <input type="text" name="email" class="input-submit" id="floatingInput" placeholder="E-mail" value=<?=$data['email']?>>
                     <label for="floatingInput"></label>
                 </div>
                 <div class="col-12">
                     <h3>Username</h3>
-                    <input type="text" name="username" class="input-submit" id="floatingInput" placeholder="username">
+                    <input type="text" name="username" class="input-submit" id="floatingInput" placeholder="username" value=<?=$data['username']?>>
                     <label for="floatingInput"></label>
                 </div>
                 <div class="col-12">
@@ -38,6 +95,7 @@
                     <input type="password" name="password" class="input-submit" id="floatingInput" placeholder="Password">
                     <label for="floatingInput"></label>
                 </div>
+                <button type="submit" name="submit">UPDATE</button>
             </div>
         </form>
     </div>

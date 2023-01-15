@@ -1,4 +1,17 @@
-<?php require "config.php" ?>
+<?php 
+session_start();
+if (!isset($_SESSION['username'])){
+    $_SESSION['msg'] = 'anda harus login';
+    header('Location: login.php');
+}
+require "config.php";
+
+$uname = $_SESSION['username'];
+$sql = "SELECT * FROM users WHERE username = '$uname'";
+$query = mysqli_query($con, $sql);
+$data = mysqli_fetch_assoc($query);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,7 +27,7 @@
 <header>
     <nav>
         <ul>
-            <p><a href= "dashboard.php">DASHBOARD</a></p>
+            <p><a href= "home.php">Home</a></p>
         </ul>
     </nav>
 </header>
@@ -34,8 +47,8 @@
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Username</th>
-                    <th>Product</th>
+                    <th>Item</th>
+                    <th>Jumlah</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
@@ -52,9 +65,9 @@
                 }
                 if(isset($_GET['search'])){
                     $search = $_GET['search'];
-                    $sql="SELECT * from transaction WHERE ign LIKE '%$search%' order by id_tr Asc limit $posisi, $batas";
+                    $sql="SELECT * from transaksi WHERE item LIKE '%$search%' order by id_tr Asc limit $posisi, $batas";
                 }else{
-                    $sql="SELECT * from transaction order by id_tr Asc limit $posisi,$batas";
+                    $sql="SELECT * from transaksi order by id_tr Asc limit $posisi,$batas";
                 }
 
                 $hasil=mysqli_query($con, $sql);
@@ -62,8 +75,8 @@
                 ?>
                 <tr>
                     <td><?= ($data['id_tr']) ?></td>
-                    <td><?= ($data['ign']) ?></td>
-                    <td><?= ($data['product']) ?></td>
+                    <td><?= ($data['item']) ?></td>
+                    <td><?= ($data['jumlah']) ?></td>
                     <td>
                         <form>
                             <a class="page-item" href="history2.php?id_tr=<?= $data['id_tr'] ?>">Read</a>
@@ -81,9 +94,9 @@
                 <?php
                 if(isset($_GET['search'])){
                     $search = $_GET['search'];
-                    $query2 = "SELECT * from transaction WHERE ign LIKE '%$search%' order by id_tr Desc";
+                    $query2 = "SELECT * from transaksi WHERE item LIKE '%$search%' order by id_tr Desc";
                 }else{
-                    $query2 = "SELECT * from transaction order by id_tr Desc";
+                    $query2 = "SELECT * from transaksi order by id_tr Desc";
                 }
                 $result2 = mysqli_query($con, $query2);
                 $jmldata = mysqli_num_rows($result2);

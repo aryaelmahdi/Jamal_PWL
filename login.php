@@ -70,15 +70,11 @@ if (isset($_POST['submit'])){
             <input class="form-control" id="floatingInput" name="kodecaptcha" value="" maxlength="5"/>
             <label for="floatingInput">Captcha</label>
         </div>
-
         <button class="w-100 btn btn-lg btn-primary" name="submit" type="submit">Sign in</button>
         <p>Belum Punya Akun? <a href="register.php">Register</a></p>
         <p class="mt-5 mb-3 text-muted">&copy; 2022 JAMALGAMING</p>
     </form>
 </main>
-
-
-
 </body>
 </html>
 
