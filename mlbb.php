@@ -7,16 +7,18 @@
     require "config.php";
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $uname = $_POST['nama'];
+        $uname = $_SESSION['username'];
         $uid = $_POST['uid'];
+        $ign = $_POST['nama'];
         $item = $_POST['Product'];
         $payment = $_POST['pay'];
         $jumlah = '1';
 
         $sql = "INSERT INTO transaksi SET 
                 username = '$uname',
+                ign = '$ign',
                 uid = '$uid',
-                item = '$item',
+                id_item = '$item',
                 payment = '$payment',
                 jumlah = '$jumlah'";
         $query = mysqli_query($con, $sql);
