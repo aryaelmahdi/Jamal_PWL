@@ -6,55 +6,57 @@
     }
 
     require "config.php";
-    // $uname = $_SESSION['username'];
-    // $sql = "SELECT * FROM users WHERE username = '$uname'";
-    // $query = mysqli_query($con, $sql);
-    // $data = mysqli_fetch_assoc($query);
-    // if(isset($_POST['submit'])){
-    //     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    //         $email = $_POST['email'];
-    //         $username = $_POST['name'];
-    //         $password = $_POST['password'];
-    //         $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-    //         $id = $data['id'];
-
-    //         $sql = "UPDATE elmahdi SET 
-    //                 email = '$email',
-    //                 username = '$username',
-    //                 password = '$hashedPass'
-    //                 WHERE id = '$id'";
-    //         $query = mysqli_query($con, $sql);
-    
-    //         if ($query) header("location:home.php");
-    
-    //         echo "Something Went Wrong On The Update";
-    //     }
-    // }
-
- 
-    
     $uname = $_SESSION['username'];
     $sql = "SELECT * FROM users WHERE username = '$uname'";
     $query = mysqli_query($con, $sql);
     $data = mysqli_fetch_assoc($query);
-    $id = $data['id'];
+    if(isset($_POST['submit'])){
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $email = $_POST['email'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+            $oldpassword = $data['password'];
+            $newpassword = $_POST['newpassword'];
+            $id = $data['id'];
+
+            $sql = "UPDATE users SET 
+                    email = '$email',
+                    username = '$username',
+                    password = '$hashedPass'
+                    WHERE id = '$id'";
+            $query = mysqli_query($con, $sql);
     
-    if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
-        extract($_REQUEST);
-        $data	=	array(
-                        'email'=>$email,
-                        'username'=>$username,
-                        'password'=>$password,
-                        );
-        $update	=	$db->update('users',$data,array('id'=>$id));
-        if($update){
-            header('location: browse-users.php?msg=rus');
-            exit;
-        }else{
-            header('location: browse-users.php?msg=rnu');
-            exit;
+            if ($query) header("location:home.php");
+    
+            echo "Something Went Wrong On The Update";
         }
     }
+
+ 
+    
+    // $uname = $_SESSION['username'];
+    // $sql = "SELECT * FROM users WHERE username = '$uname'";
+    // $query = mysqli_query($con, $sql);
+    // $data = mysqli_fetch_assoc($query);
+    // $id = $data['id'];
+    
+    // if(isset($_REQUEST['submit']) and $_REQUEST['submit']!=""){
+    //     extract($_REQUEST);
+    //     $data	=	array(
+    //                     'email'=>$email,
+    //                     'username'=>$username,
+    //                     'password'=>$password,
+    //                     );
+    //     $update	=	$db->update('users',$data,array('id'=>$id));
+    //     if($update){
+    //         header('location: browse-users.php?msg=rus');
+    //         exit;
+    //     }else{
+    //         header('location: browse-users.php?msg=rnu');
+    //         exit;
+    //     }
+    // }
     
 ?>
 <!DOCTYPE html>
@@ -77,7 +79,7 @@
     </nav>
 </header>
     <div class="col-12" id="data2">
-        <form>
+        <form action="profile.php" method="POST">
             <div class="row background-data">
                 <h1>Data Anda</h1>
                 <div class="col-12">
@@ -91,8 +93,18 @@
                     <label for="floatingInput"></label>
                 </div>
                 <div class="col-12">
-                    <h3>Password</h3>
-                    <input type="password" name="password" class="input-submit" id="floatingInput" placeholder="Password">
+                    <h3>Old Password</h3>
+                    <input type="password" name="oldpassword" class="input-submit" id="floatingInput" placeholder="Password">
+                    <label for="floatingInput"></label>
+                </div>
+                <div class="col-12">
+                    <h3>New Password</h3>
+                    <input type="password" name="newpassword" class="input-submit" id="floatingInput" placeholder="New Password">
+                    <label for="floatingInput"></label>
+                </div>
+                <div class="col-12">
+                    <h3>New Password</h3>
+                    <input type="password" name="renewpassword" class="input-submit" id="floatingInput" placeholder="Retype New Password">
                     <label for="floatingInput"></label>
                 </div>
                 <button type="submit" name="submit">UPDATE</button>

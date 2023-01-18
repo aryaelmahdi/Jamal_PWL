@@ -27,7 +27,7 @@ $data = mysqli_fetch_assoc($query);
 <header>
     <nav>
         <ul>
-            <p><a href= "home.php">Home</a></p>
+            <p><a href= "dashboard.php">Home</a></p>
         </ul>
     </nav>
 </header>

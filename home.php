@@ -20,7 +20,7 @@ if (!isset($_SESSION['username'])){
     <link href="css/carousel.rtl.css" rel="stylesheet">
     <link rel="icon" type="image" sizes="32x32" href="images/favicon-32x32.png"/>
 </head>
-<body>
+<body style="background-color: #2F4454;">
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -40,7 +40,7 @@ if (!isset($_SESSION['username'])){
     </nav>
 </header>
 
-<main>
+<main style="background-color: #2F4454;">
 
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -107,13 +107,13 @@ if (!isset($_SESSION['username'])){
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing">
+    <div class="container marketing" style="background-color: #2F4454;">
 
         <!-- Three columns of text below the carousel -->
         <div class="row" id="produk">
             <div class="col-lg-6">
                 <img src="images/valorant.jpg" width="140" height="140">
-                <h2 class="fw-normal">VALORANT</h2>
+                <h2 class="fw-normal" style="color: white;">VALORANT</h2>
                 <p><a class="btn btn-secondary" href="valorant.php">TOP-UP </a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-6">
@@ -134,7 +134,7 @@ if (!isset($_SESSION['username'])){
         </div><!-- /.row -->
         <hr class="featurette-divider">
         <!-- FOOTER -->
-        <footer class="container">
+        <footer class="container" style="background-color: #2F4454;">
             <p class="float-end"><a href="#">Back to top</a></p>
             <p>&copy; 2022 JAMALGAMING</a></p>
         </footer>
